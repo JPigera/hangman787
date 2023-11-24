@@ -5,6 +5,9 @@ This is an implementation of the Hangman game, where the computer thinks of a wo
 
 
 A description of the project: what you learned
+
+So far I have written a programme which takes in a user input of a letter from the user. Then the code checks that it is a valid user input and then checks if it is one of the letters of a random word from a set.
+
 Installation instructions
 Usage instructions
 File structure of the project
