@@ -43,7 +43,7 @@ class Hangman :
                 if guess == self.letter :
                     
                     self.word_guessed.replace(self.word_guessed[index], self.guess)
-
+                    print(self.word_guessed)
                 else :
 
                     pass
