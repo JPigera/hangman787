@@ -15,7 +15,6 @@ class Hangman :
         self.num_lives = num_lives # int - The number of lives the player has at the start of the game.
         self.word_list = word_list #list - A list of words
         self.list_of_guesses = [] #list - A list of the guesses that have already been tried
-        self.guess = input("Guess a letter:")
 
     def check_guess(self, guess) :
         '''This method takes in the users one character guess as a parameter.
@@ -28,39 +27,33 @@ class Hangman :
         
         '''
 
-        self.guess = self.guess.lower()
+        guess = guess.lower()
 
-        if self.guess in self.word :
+        if guess in self.word :
 
-            print(f"Good guess! {self.guess} is in the word.")
+            print(f"Good guess! {guess} is in the word.")
 
-            index = -1
-
-            for self.letter in self.word_list :
-            
-                index+=1
+            for self.letter, index in enumerate(self.word_list) :
 
                 if guess == self.letter :
                     
-                    self.word_guessed.replace(self.word_guessed[index], self.guess)
-                    print(self.word_guessed)
+                    self.word_guessed.replace(self.word_guessed[index], guess)
+
+                    self.num_letters-=1
+
                 else :
 
                     pass
 
         else :
 
-            print(f"Sorry, {self.guess} is not in the word. Try again.")
+            print(f"Sorry, {guess} is not in the word. Try again.")
 
             self.num_lives-= 1
 
-            print(f"Sorry, {self.guess} is not in the word.")
-
             print(f"You have {self.num_lives} lives left.")
 
-        self.num_letters-=1
-
-        return self.guess
+        return
     
     def ask_for_input(self) :
 
@@ -79,18 +72,22 @@ class Hangman :
 
         self.guess = input("Guess a letter:")
 
-        while len(self.guess) != 1 or self.guess.isalpha() == False:
+        while True:
 
-            print("Invalid letter. Please, enter a single alphabetical character.")
-
-            self.guess = input("Guess a letter:")
-            
             if self.guess.isalpha() == True and len(self.guess) == 1:
                 if self.guess in self.list_of_guesses :
                     print("You already tried that letter!")
                 
                 else :
+
                     break
+            
+            else:
+
+                print("Invalid letter. Please, enter a single alphabetical character.")
+
+            self.guess = input("Guess a letter:")
+
 
         self.list_of_guesses.append(self.guess)
 
@@ -113,7 +110,10 @@ def play_game(word_list):
     while True :
 
         if num_lives==0 :
+
             print('You lost!')
+            
+            break
         
         else :
 
