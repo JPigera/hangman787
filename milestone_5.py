@@ -99,6 +99,13 @@ class Hangman :
 
 def play_game(word_list):
 
+    '''
+    This is a function that calls on the hangman method
+    The parameter is the word_list which has to be initialised before
+    The function counts the lives remaining of the user while reducing 
+    the number of lives by one; after every incorrect guess
+    '''
+
     num_lives = 5
 
     game = Hangman(word_list, num_lives) #creating an instance of the class
