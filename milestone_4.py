@@ -5,63 +5,75 @@ word_list = ["apple", "lemon", "avocado", "pear", "pineapple"] #a list of words 
 
 print(word_list)
 
-word = random.choice(word_list) # generates random word from the list
-
-print(word)
-
-secret_word = list(word) # splits the word up into a list of letters
-
-print(secret_word)
-
-def ask_for_input() : # function that asks the user for the input and makes sure it is a valid input
-
-    guess = input("Guess a letter:")
-
-    while len(guess) != 1 or guess.isalpha() == False:
-
-        print("Invalid letter. Please, enter a single alphabetical character.")
-
-        guess = input("Guess a letter:")
-        
-        if guess.isalpha() == True and len(guess) == 1:
-
-            break
-
-    check_guess(guess) # check guess function is called as part of the ask_for_input() function
-
-def check_guess(guess) : # The function turns the input into lower case and then checks if the guess is in the secret word
-
-    guess = guess.lower()
-
-    if guess in secret_word :
-
-        print(f"Good guess! {guess} is in the word.")
-
-    else :
-
-        print(f"Sorry, {guess} is not in the word. Try again.")
-
-    return guess
-
-ask_for_input()
-
 class Hangman :
 
     def __init__(self, word_list, num_lives= 5) :
 
-        self.word_list = word_list
+        self.word = random.choice(word_list) #The word to be guessed, picked randomly from the word_list
+        self.word_guessed = [letter.replace(letter, "_") for letter in word_list] # list - A list of the letters of the word
+        self.num_letters = len(set(self.word)) # int - The number of UNIQUE letters in the word that have not been guessed yet
+        self.num_lives = num_lives # int - The number of lives the player has at the start of the game.
+        self.word_list = word_list #list - A list of words
+        self.list_of_guesses = [] #list - A list of the guesses that have already been tried
+        self.guess = input("Guess a letter:")
 
-        self.num_lives = num_lives
+    def check_guess(self, guess) : # The function turns the input into lower case and then checks if the guess is in the secret word
 
-        self.word = word
+        self.guess = self.guess.lower()
 
-        self.word_guessed = wordguessed
+        if self.guess in self.word :
 
-        self.num_letters = num_letters
+            print(f"Good guess! {self.guess} is in the word.")
 
-        self.num_lives = num_lives
+            index = -1
 
-        self.list_of_guesses = list_of_guesses
+            for self.letter in self.word_list :
+            
+                index+=1
 
+                if guess == self.letter :
+                    
+                    self.word_guessed.replace(self.word_guessed[index], self.guess)
 
+                else :
+
+                    pass
+
+        else :
+
+            print(f"Sorry, {self.guess} is not in the word. Try again.")
+
+            self.num_lives-= 1
+
+            print(f"Sorry, {self.guess} is not in the word.")
+
+            print(f"You have {self.num_lives} lives left.")
+
+        self.num_letters-=1
+
+        return self.guess
     
+    def ask_for_input(self) : # function that asks the user for the input and makes sure it is a valid input
+
+        self.guess = input("Guess a letter:")
+
+        while len(self.guess) != 1 or self.guess.isalpha() == False:
+
+            print("Invalid letter. Please, enter a single alphabetical character.")
+
+            self.guess = input("Guess a letter:")
+            
+            if self.guess.isalpha() == True and len(self.guess) == 1:
+                if self.guess in self.list_of_guesses :
+                    print("You already tried that letter!")
+                
+                else :
+                    break
+
+        self.list_of_guesses.append(self.guess)
+
+        return self.check_guess(self.guess)
+
+h = Hangman(word_list)
+
+h.ask_for_input()
