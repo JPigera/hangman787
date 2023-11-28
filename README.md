@@ -7,4 +7,6 @@ So far I have written a programme which takes in a user input of a letter from t
  
 Most of the code is within a class called Hangman. Hangman contains two functions. The first one  "ask_for_input()"  asks the user for an input and makes sure that it is a valid input, then at the end of the function the second function is called. The second function is the check guess function "check_guess()". This function is used to tell the user if their guess was correct and will add their guess to a list of guesses. If the guess was wrong a message will be produced that the guess was wrong and a life will be taken from their lives.
 
+Then I created a function that contains the Hangman class and will call the class' ask for input method to play the game.
+
 This has been a useful project to implement the skills I have used thus far on the AI core course. It has also helped contextualise the tools that I have learnt and has shown the benefit of utilizing them.

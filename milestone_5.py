@@ -96,6 +96,28 @@ class Hangman :
 
         return self.check_guess(self.guess)
 
-h = Hangman(word_list) #instantiating a instance of the class
 
-h.ask_for_input() #calling the method within the Hangman class
+def play_game(word_list):
+
+    num_lives = 5
+
+    game = Hangman(word_list, num_lives) #creating an instance of the class
+
+    while True :
+
+        if num_lives==0 :
+            print('You lost!')
+        
+        else :
+
+            if game.num_letters > 0 :
+
+                game.ask_for_input()  #calling the method within the Hangman class
+
+            else :
+                
+                print('Congratulations. You won the game!')
+
+                break
+
+play_game(word_list)
